@@ -1,3 +1,3 @@
-# BukkitTemplate
+# SimpleInfo
 
-A quick template for making shitty plugins.
+A simple way of displaying info to the player using scoreboards and tablists.

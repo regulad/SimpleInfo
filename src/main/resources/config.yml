@@ -1,0 +1,13 @@
+version: 1 # Don't touch this! For future use.
+
+tab_list:
+  header:
+    - "&bHi!"
+  footer:
+    - "&bBye!"
+
+scoreboard:
+  title: "&bPhat Nuts"
+  content:
+    - "&bWait, what?"
+    - "&bMuscle man?"

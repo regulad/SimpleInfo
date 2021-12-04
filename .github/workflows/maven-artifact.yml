@@ -5,6 +5,8 @@ name: Java CI with Maven and Artifact
 
 on:
   push:
+    tags:
+      - "*"
     branches: [ master ]
   pull_request:
     branches: [ master ]
@@ -26,8 +28,22 @@ jobs:
           distribution: adopt
       - name: Build with Maven
         run: mvn package
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: AdvancementHunt
+          name: SimpleInfo
           path: target/*.jar
+      - name: Publish package
+        if: startsWith(github.ref, 'refs/tags/')
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: fnkr/github-action-ghr@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GHR_PATH: target/
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
